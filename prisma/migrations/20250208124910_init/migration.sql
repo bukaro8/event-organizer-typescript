@@ -4,9 +4,12 @@ CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "picture" TEXT,
     "role" "Role" NOT NULL,
-    "createdAt" TIMESTAMP,
+    "phone" TEXT,
+    "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -15,7 +18,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Ticket" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "status" BOOLEAN NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP,
 
     CONSTRAINT "Ticket_pkey" PRIMARY KEY ("id")
