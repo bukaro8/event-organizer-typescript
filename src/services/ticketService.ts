@@ -11,3 +11,19 @@ export const createTicket = async (userId: string): Promise<Ticket> => {
 	});
 	return ticket;
 };
+
+export const allTickets = async () => {
+	const tickets = await prisma.ticket.findMany({
+		select: {
+			id: true,
+			status: true,
+			user: {
+				select: {
+					name: true,
+					email: true,
+				},
+			},
+		},
+	});
+	return tickets;
+};

@@ -54,7 +54,6 @@ export const getUserByEmail = async (req: Request, res: Response) => {
 	try {
 		const { email } = req.params;
 		if (!email) throw Error('error');
-		console.log(req.params);
 		const user = await userByEmail(email);
 		res.status(200).send({ status: 'success', data: user });
 	} catch (error: any) {
