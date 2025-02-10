@@ -11,11 +11,11 @@ const userRouter = express.Router();
 
 userRouter.post('/create-user', createUserController);
 userRouter.get('/users', getAllUsersController);
+userRouter.get('/:email', getUserByEmail);
 userRouter
 	.route('/:id')
 	.get(getUserById)
 	.put(updateUserController)
 	.delete(deleteUserController);
-userRouter.get('/:email', getUserByEmail);
 
 export default userRouter;
