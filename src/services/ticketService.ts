@@ -27,3 +27,24 @@ export const allTickets = async () => {
 	});
 	return tickets;
 };
+
+export const getTicketById = async (id: string) => {
+	const ticket = await prisma.ticket.findUnique({ where: { id } });
+	if (!ticket) {
+		throw new Error(`User with id ${ticket}} not found`);
+	}
+	return ticket;
+};
+
+export const updateTicket = async (
+	id: string,
+	status: boolean
+): Promise<Ticket> => {
+	const checkTicket = await getTicketById(id);
+	if (checkTicket.status === false) throw new Error('Ticket was used already ');
+	const ticket = await prisma.ticket.update({
+		where: { id },
+		data: { status },
+	});
+	return ticket;
+};
