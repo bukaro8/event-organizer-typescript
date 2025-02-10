@@ -25,11 +25,18 @@ model User {
 }
 
 model Ticket {
-  id        String    @id @default(uuid())
+  id        String     @id @default(uuid())
+  simpleId  String
+  type      TicketType
   userId    String
-  status    Boolean   @default(true)
-  createdAt DateTime? @default(now()) @db.Timestamp()
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status    Boolean    @default(true)
+  createdAt DateTime?  @default(now()) @db.Timestamp()
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum TicketType {
+  RAFFLE
+  TOKEN
 }
 
 enum Role {
