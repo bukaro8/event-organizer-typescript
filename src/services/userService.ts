@@ -21,11 +21,40 @@ export const createUser = async (data: CreateUserInput): Promise<User> => {
 		},
 	});
 };
-export const allUsers = async (): Promise<User[]> => {
-	return await prisma.user.findMany();
+export const allUsers = async () => {
+	const users = await prisma.user.findMany({
+		select: {
+			id: true,
+			name: true,
+			email: true,
+			role: true,
+			phone: true,
+			_count: {
+				select: { tickets: true },
+			},
+		},
+	});
+	return users;
 };
+
 export const userById = async (id: string) => {
-	const user = await prisma.user.findUnique({ where: { id } });
+	const user = await prisma.user.findUnique({
+		where: { id },
+		select: {
+			id: true,
+			name: true,
+			email: true,
+			_count: {
+				select: { tickets: true },
+			},
+			tickets: {
+				select: {
+					id: true,
+					status: true,
+				},
+			},
+		},
+	});
 	if (!user) {
 		throw new Error(`User with id ${id} not found`); // Throw the error
 	}

@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import prisma from '../data/postgres';
 
 import {
 	allUsers,
@@ -21,8 +20,8 @@ export const createUserController = async (req: Request, res: Response) => {
 		if (!name || !email) throw 'Name or email is required';
 		const newUser = await createUser({ name, picture, phone, email });
 		res.status(201).send({ status: 'success', data: newUser });
-	} catch (error) {
-		res.status(400).send({ status: 'fail' });
+	} catch (error: any) {
+		res.status(400).send({ status: 'fail', message: error.message });
 	}
 };
 export const getAllUsersController = async (req: Request, res: Response) => {

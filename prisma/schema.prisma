@@ -28,7 +28,7 @@ model Ticket {
   id        String    @id @default(uuid())
   userId    String
   status    Boolean   @default(true)
-  createdAt DateTime? @db.Timestamp()
+  createdAt DateTime? @default(now()) @db.Timestamp()
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 

@@ -5,6 +5,7 @@ import Server from './server';
 import { envs } from './plugins/envs/envs.plugin';
 import { app } from './server';
 import userRouter from './routes/userRouter';
+import ticketRouter from './routes/ticketRouter';
 Server();
 const version = '/api/v1';
 
@@ -20,6 +21,7 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 //?Routes====================
 app.use(`${version}/user`, userRouter);
+app.use(`${version}/ticket`, ticketRouter);
 //?Routes====================
 
 export default app;
