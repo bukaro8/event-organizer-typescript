@@ -1,8 +1,10 @@
 import prisma from '../data/postgres';
 import { User } from '@prisma/client';
+import { hashPassword } from '../plugins/functions/auth';
 
 interface CreateUserInput {
 	name: string;
+	password: string;
 	role?: 'ADMIN' | 'USER';
 	picture?: string;
 	email: string;
@@ -11,14 +13,20 @@ interface CreateUserInput {
 export const createUser = async (data: CreateUserInput): Promise<User> => {
 	const user = await prisma.user.findUnique({ where: { email: data.email } });
 	if (user) throw new Error(`User with ${data.email} already exist`);
-	return await prisma.user.create({
+	const newUser = await prisma.user.create({
 		data: {
 			name: data.name,
+			password: '',
 			role: data.role || 'USER',
 			email: data.email,
-			picture: data.picture || null,
-			phone: data.phone || null,
+			picture: data.picture,
+			phone: data.phone,
 		},
+	});
+	const hash = await hashPassword(data.password);
+	return prisma.user.update({
+		where: { id: newUser.id },
+		data: { password: hash },
 	});
 };
 export const allUsers = async () => {
@@ -63,7 +71,7 @@ export const userById = async (id: string) => {
 
 export const userByEmail = async (email: string): Promise<User> => {
 	const user = await prisma.user.findUnique({ where: { email } });
-	if (!user) throw new Error(`User with id ${email} not found`);
+	if (!user) throw new Error(`User with email ${email} not found`);
 	return user;
 };
 export const updateUser = async (id: string, data: any): Promise<User> => {

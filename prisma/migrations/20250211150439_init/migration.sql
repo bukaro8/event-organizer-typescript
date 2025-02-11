@@ -8,6 +8,7 @@ CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "picture" TEXT,
     "role" "Role" NOT NULL,
@@ -20,6 +21,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Ticket" (
     "id" TEXT NOT NULL,
+    "simpleId" TEXT NOT NULL,
     "type" "TicketType" NOT NULL,
     "userId" TEXT NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT true,

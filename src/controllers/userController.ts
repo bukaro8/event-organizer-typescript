@@ -10,16 +10,30 @@ import {
 } from '../services/userService';
 interface UserProps {
 	name: string;
-	phone: string | null;
-	picture?: string | null;
+	email: string;
+	password: string;
+	phone: string;
+	picture?: string | undefined;
 }
 
 export const createUserController = async (req: Request, res: Response) => {
 	try {
-		const { name, picture, phone, email } = req.body;
+		const { name, picture, phone, email, password }: UserProps = req.body;
 		if (!name || !email) throw 'Name or email is required';
-		const newUser = await createUser({ name, picture, phone, email });
-		res.status(201).send({ status: 'success', data: newUser });
+		const newUser = await createUser({
+			name,
+			picture,
+			phone,
+			email,
+			password,
+		});
+		const response = {
+			name: newUser.name,
+			picture: newUser.picture,
+			email: newUser.email,
+			phone: newUser.phone,
+		};
+		res.status(201).send({ status: 'success', data: response });
 	} catch (error: any) {
 		res.status(400).send({ status: 'fail', message: error.message });
 	}
