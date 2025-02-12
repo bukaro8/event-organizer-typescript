@@ -1,7 +1,7 @@
 import prisma from '../data/postgres';
 import { User } from '@prisma/client';
 import { hashPassword } from '../plugins/functions/auth';
-import createAccessToken from '../plugins/functions/jwt';
+import { createAccessToken } from '../plugins/functions/jwt';
 
 interface CreateUserInput {
 	name: string;

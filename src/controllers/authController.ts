@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { login } from '../services/authService';
+import { userById } from '../services/userService';
 
 export const loginController = async (req: Request, res: Response) => {
 	try {
@@ -21,4 +22,10 @@ export const logoutController = (req: Request, res: Response) => {
 		expires: new Date(0),
 	});
 	res.sendStatus(200);
+};
+
+export const profileController = async (req: any, res: Response) => {
+	const { id } = req.user;
+	const user = await userById(id);
+	res.status(200).send(user);
 };

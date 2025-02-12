@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { envs } from '../envs/envs.plugin';
 
-const createAccessToken = (payload: any) => {
+export const createAccessToken = (payload: any) => {
 	return new Promise((resolve, reject) => {
 		jwt.sign(
 			payload,
@@ -16,4 +16,12 @@ const createAccessToken = (payload: any) => {
 		);
 	});
 };
-export default createAccessToken;
+
+export const verifyAccessToken = (token: string) => {
+	try {
+		const user = jwt.verify(token, envs.SECRET_KEY);
+		return user;
+	} catch (err) {
+		throw new Error('Invalid or expired token');
+	}
+};

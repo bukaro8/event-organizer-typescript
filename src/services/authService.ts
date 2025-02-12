@@ -1,5 +1,5 @@
 import { checkPassword } from '../plugins/functions/auth';
-import createAccessToken from '../plugins/functions/jwt';
+import { createAccessToken } from '../plugins/functions/jwt';
 import simpleUUID from '../plugins/functions/simpleUUID';
 
 import { userByEmail } from './userService';
