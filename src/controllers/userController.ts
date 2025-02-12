@@ -27,11 +27,13 @@ export const createUserController = async (req: Request, res: Response) => {
 			email,
 			password,
 		});
+		res.cookie('token', newUser.token);
+
 		const response = {
-			name: newUser.name,
-			picture: newUser.picture,
-			email: newUser.email,
-			phone: newUser.phone,
+			name: newUser.data.name,
+			picture: newUser.data.picture,
+			email: newUser.data.email,
+			phone: newUser.data.phone,
 		};
 		res.status(201).send({ status: 'success', data: response });
 	} catch (error: any) {

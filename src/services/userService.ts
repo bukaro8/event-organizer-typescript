@@ -1,6 +1,7 @@
 import prisma from '../data/postgres';
 import { User } from '@prisma/client';
 import { hashPassword } from '../plugins/functions/auth';
+import createAccessToken from '../plugins/functions/jwt';
 
 interface CreateUserInput {
 	name: string;
@@ -10,7 +11,7 @@ interface CreateUserInput {
 	email: string;
 	phone?: string;
 }
-export const createUser = async (data: CreateUserInput): Promise<User> => {
+export const createUser = async (data: CreateUserInput) => {
 	const user = await prisma.user.findUnique({ where: { email: data.email } });
 	if (user) throw new Error(`User with ${data.email} already exist`);
 	const newUser = await prisma.user.create({
@@ -23,11 +24,18 @@ export const createUser = async (data: CreateUserInput): Promise<User> => {
 			phone: data.phone,
 		},
 	});
+	const token = await createAccessToken({ id: newUser.id });
 	const hash = await hashPassword(data.password);
-	return prisma.user.update({
+
+	await prisma.user.update({
 		where: { id: newUser.id },
 		data: { password: hash },
 	});
+	const tokenUser = {
+		token: token,
+		data: newUser,
+	};
+	return tokenUser;
 };
 export const allUsers = async () => {
 	const users = await prisma.user.findMany({

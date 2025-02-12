@@ -15,6 +15,7 @@
 		"@types/bcrypt": "^5.0.2",
 		"@types/cookie-parser": "^1.4.8",
 		"@types/express": "^5.0.0",
+		"@types/jsonwebtoken": "^9.0.8",
 		"@types/morgan": "^1.9.9",
 		"@types/node": "^22.13.1",
 		"@types/typescript": "^0.4.29",
@@ -31,6 +32,7 @@
 		"cookie-parser": "^1.4.7",
 		"dotenv": "^16.4.7",
 		"env-var": "^7.5.0",
-		"express": "^4.21.2"
+		"express": "^4.21.2",
+		"jsonwebtoken": "^9.0.2"
 	}
 }
