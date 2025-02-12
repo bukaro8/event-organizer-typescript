@@ -60,6 +60,7 @@ export const userById = async (id: string) => {
 			id: true,
 			name: true,
 			email: true,
+			role: true,
 			_count: {
 				select: { tickets: true },
 			},

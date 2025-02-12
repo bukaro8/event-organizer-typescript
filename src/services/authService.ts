@@ -12,7 +12,7 @@ export const login = async (email: string, password: string) => {
 	//? Test password
 	const isPasswordCorrect = await checkPassword(password, user.password);
 	if (!isPasswordCorrect) throw new Error('The password is not correct');
-	const token = await createAccessToken({ id: user.id });
+	const token = await createAccessToken({ id: user.id, role: user.role });
 	const userResponse = {
 		id: user.id,
 		name: user.name,

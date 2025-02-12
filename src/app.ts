@@ -7,6 +7,7 @@ import { app } from './server';
 import userRouter from './routes/userRouter';
 import ticketRouter from './routes/ticketRouter';
 import authRouter from './routes/authRouter';
+import { validateToken as isAuthenticated } from './plugins/functions/validateToken.middleware';
 Server();
 const version = '/api/v1';
 
@@ -23,7 +24,7 @@ app.use(cookieParser());
 //?Routes====================
 app.use(`${version}/auth`, authRouter);
 app.use(`${version}/user`, userRouter);
-app.use(`${version}/ticket`, ticketRouter);
+app.use(`${version}/ticket`, isAuthenticated, ticketRouter);
 //?Routes====================
 
 export default app;

@@ -8,11 +8,11 @@ import {
 	updateTicket,
 } from '../services/ticketService';
 
-export const createTicketController = async (req: Request, res: Response) => {
+export const createTicketController = async (req: any, res: Response) => {
 	try {
-		const { userId } = req.params;
+		const { id } = req.user;
 		const { type } = req.body;
-		const ticket = await createTicket(userId, type);
+		const ticket = await createTicket(id, type);
 		res.status(201).send({
 			status: 'success',
 			data: ticket,
@@ -21,7 +21,7 @@ export const createTicketController = async (req: Request, res: Response) => {
 		res.status(400).send({ status: 'fail', message: error.message });
 	}
 };
-export const getAllTicketsController = async (req: Request, res: Response) => {
+export const getAllTicketsController = async (req: any, res: Response) => {
 	try {
 		const tickets = await allTickets();
 		res.status(201).send({

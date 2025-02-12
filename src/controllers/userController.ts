@@ -33,6 +33,7 @@ export const createUserController = async (req: Request, res: Response) => {
 			name: newUser.data.name,
 			picture: newUser.data.picture,
 			email: newUser.data.email,
+			role: newUser.data.role,
 			phone: newUser.data.phone,
 		};
 		res.status(201).send({ status: 'success', data: response });
@@ -40,7 +41,7 @@ export const createUserController = async (req: Request, res: Response) => {
 		res.status(400).send({ status: 'fail', message: error.message });
 	}
 };
-export const getAllUsersController = async (req: Request, res: Response) => {
+export const getAllUsersController = async (req: any, res: Response) => {
 	try {
 		const users = await allUsers();
 		res
