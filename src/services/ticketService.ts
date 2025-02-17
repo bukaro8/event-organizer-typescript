@@ -29,6 +29,7 @@ export const allTickets = async () => {
 		select: {
 			id: true,
 			status: true,
+			type: true,
 			user: {
 				select: {
 					name: true,
@@ -59,6 +60,26 @@ export const allActiveTickets = async () => {
 	return tickets;
 };
 
+export const allRaffleTickets = async () => {
+	const tickets = await prisma.ticket.findMany({
+		where: {
+			type: 'RAFFLE',
+			status: true,
+		},
+		select: {
+			id: true,
+			status: true,
+			type: true,
+			user: {
+				select: {
+					name: true,
+					email: true,
+				},
+			},
+		},
+	});
+	return tickets;
+};
 export const getTicketById = async (id: string) => {
 	const ticket = await prisma.ticket.findUnique({ where: { id } });
 	if (!ticket) {

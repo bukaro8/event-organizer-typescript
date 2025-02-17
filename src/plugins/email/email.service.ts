@@ -23,17 +23,17 @@ export class EmailService {
 	async sendEmail(options: SendMailOptions): Promise<boolean> {
 		const { from, to, subject, htmlBody } = options;
 		try {
-			console.log('Enviando correo...');
+			// console.log('Enviando correo...');
 			const sendInformation = await this.transporter.sendMail({
 				from: from,
 				to: to,
 				subject: subject,
 				html: htmlBody,
 			});
-			// console.log('Correo enviado:', sendInformation);
+
 			return true;
 		} catch (error) {
-			console.error('Error al enviar el correo:', error);
+			console.error('error sending email:', error);
 			return false;
 		}
 	}

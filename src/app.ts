@@ -34,54 +34,114 @@ app.use(`${version}/ticket`, isAuthenticated, ticketRouter);
 // 	from: '"Account Created" <notifications.mailer.app@gmail.com>',
 // 	to: 'bukaro83@gmail.com',
 // 	subject: 'prueva inicial de correos',
-// 	htmlBody: `
-// <!DOCTYPE html>
-// <html lang="es">
-// <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <title>Bienvenido a [Nombre de tu App]</title>
-//     <style>
-//         /* Estilos aquí */
-//     </style>
-// </head>
-// <body>
-//     <div class="email-container">
-//         <!-- Encabezado -->
-//         <div class="header">
-//             <h1>¡Bienvenido a [Nombre de tu App]!</h1>
-//         </div>
-
-//         <!-- Contenido -->
-//         <div class="content">
-//             <h2>Hola [Nombre del Usuario],</h2>
-//             <p>
-//                 Gracias por registrarte en [Nombre de tu App]. Estamos emocionados de tenerte con nosotros.
-//                 Ahora puedes disfrutar de todas las funcionalidades que ofrecemos.
-//             </p>
-//             <p>
-//                 Para comenzar, te invitamos a explorar nuestro sitio web y descubrir todo lo que tenemos para ti.
-//             </p>
-//             <a href="[Enlace al sitio web]" class="cta-button">Visitar nuestro sitio</a>
-//             <p>
-//                 Si tienes alguna pregunta, no dudes en contactarnos en <a href="mailto:soporte@tudominio.com">soporte@tudominio.com</a>.
-//             </p>
-//         </div>
-
-//         <!-- Pie de página -->
-//         <div class="footer">
-//             <p>
-//                 Este correo fue enviado por [Nombre de tu App]. Si no deseas recibir más correos,
-//                 <a href="[Enlace para darse de baja]">darse de baja</a>.
-//             </p>
-//             <p>
-//                 &copy; 2023 [Nombre de tu App]. Todos los derechos reservados.
-//             </p>
-//         </div>
-//     </div>
-// </body>
-// </html>
-// `,
+// 	htmlBody: `<!DOCTYPE html>
+// 	<html>
+// 	<head>
+// 			<style>
+// 					body {
+// 							font-family: Arial, sans-serif;
+// 							margin: 0;
+// 							padding: 0;
+// 							background-color: #f4f4f4;
+// 					}
+// 					.container {
+// 							width: 80%;
+// 							margin: auto;
+// 							overflow: hidden;
+// 					}
+// 					.header {
+// 							background: #333;
+// 							color: #fff;
+// 							padding-top: 30px;
+// 							min-height: 70px;
+// 							border-bottom: #77aaff 3px solid;
+// 					}
+// 					.header a {
+// 							color: #fff;
+// 							text-decoration: none;
+// 							text-transform: uppercase;
+// 							font-size: 16px;
+// 					}
+// 					.header ul {
+// 							padding: 0;
+// 							list-style: none;
+// 					}
+// 					.header li {
+// 							float: left;
+// 							display: inline;
+// 							padding: 0 20px 0 20px;
+// 					}
+// 					.header #branding {
+// 							float: left;
+// 					}
+// 					.header #branding h1 {
+// 							margin: 0;
+// 					}
+// 					.header nav {
+// 							float: right;
+// 							margin-top: 10px;
+// 					}
+// 					.banner {
+// 							text-align: center;
+// 							margin-bottom: 50px;
+// 					}
+// 					.banner img {
+// 							width: 100%;
+// 							height: auto;
+// 					}
+// 					.content {
+// 							padding: 20px;
+// 							background: #fff;
+// 					}
+// 					.content h2 {
+// 							margin: 0;
+// 							padding-bottom: 20px;
+// 							color: #333;
+// 							text-align: center;
+// 					}
+// 					.content p {
+// 							text-align: center;
+// 							font-size: 18px;
+// 							line-height: 1.6;
+// 					}
+// 					.footer {
+// 							background: #333;
+// 							color: #fff;
+// 							text-align: center;
+// 							padding: 10px;
+// 							margin-top: 20px;
+// 					}
+// 			</style>
+// 	</head>
+// 	<body>
+// 			<div class="container">
+// 					<div class="header">
+// 							<div id="branding">
+// 									<h1>School Fun Fair</h1>
+// 							</div>
+// 							<nav>
+// 									<ul>
+// 											<li><a href="#">Home</a></li>
+// 											<li><a href="#">About</a></li>
+// 											<li><a href="#">Contact</a></li>
+// 									</ul>
+// 							</nav>
+// 					</div>
+// 					<div class="banner">
+// 							<img src="https://media.istockphoto.com/id/1322196888/vector/funfair-banner-with-typography-design-vector-illustration-with-retro-light-bulbs-font-streamers.jpg?s=612x612&w=0&k=20&c=ZJl78V22Z3067j6W3Y87jyh5-F5_yKZ63kF9KZOqDXc=" alt="Fun Fair Banner">
+// 					</div>
+// 					<div class="content">
+// 							<h2>Welcome to Our School Fun Fair!</h2>
+// 							<p>Join us for a day filled with fun, games, and excitement!</p>
+// 							<img src="https://media.istockphoto.com/id/1322196888/vector/funfair-banner-with-typography-design-vector-illustration-with-retro-light-bulbs-font-streamers.jpg?s=612x612&w=0&k=20&c=ZJl78V22Z3067j6W3Y87jyh5-F5_yKZ63kF9KZOqDXc=" alt="Fun Fair Activities">
+// 							<p>Enjoy various activities like face painting, carnival games, and delicious treats!</p>
+// 					</div>
+// 					<div class="footer">
+// 							<p>© 2023 School Fun Fair. All rights reserved.</p>
+// 					</div>
+// 			</div>
+// 	</body>
+// 	</html>`,
 // });
 
 export default app;

@@ -5,6 +5,7 @@ import {
 	getActiveTicketsController,
 	getAllTicketsController,
 	getTicketByIdController,
+	raffleTicketController,
 	updateTicketController,
 } from '../controllers/ticketController';
 import { isAdmin } from '../plugins/functions/isAdmin.middleware';
@@ -20,5 +21,6 @@ ticketRouter
 	.get(getTicketByIdController)
 	.put(isAdmin, updateTicketController)
 	.delete(isAdmin, deleteTicketController);
+ticketRouter.get('/admin/raffle', isAdmin, raffleTicketController);
 
 export default ticketRouter;
